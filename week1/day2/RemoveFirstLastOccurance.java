@@ -8,7 +8,7 @@ public class RemoveFirstLastOccurance {
 
 	@Test
 	public void positive() {
-		int[] arr = { 2, 1, 3, 5, 1, 7, 9, 8 };
+		int[] arr = { 2, 1, 3, 5, 8, 1, 7, 9, 8 };
 		int num = 1;
 		removeFrstLstOcc(arr, num);
 	}
@@ -50,9 +50,9 @@ public class RemoveFirstLastOccurance {
 		int left = 0;
 		int right = arr.length - 1;
 		int l = 0, r = 0;
-		
+
 		int[] arr1 = new int[arr.length - 2];
-		int k=arr1.length-1;
+		int k = arr1.length - 1;
 		while (left <= right) {
 
 			if (arr[left] == num && l != 1) {
@@ -63,15 +63,16 @@ public class RemoveFirstLastOccurance {
 			else {
 				arr1[left - l] = arr[left++];
 			}
+//{ 2, 1, 3, 5, 8, 1, 7, 9, 8 };
 			if (arr[right] == num && r != 1) {
 				r++;// 1
 				right--;
-				k--;
+				// k--;
 
 			} else {
-				arr1[k -r] = arr[right--];
+				arr1[k] = arr[right--];
 				k--;
-				
+
 			}
 
 		}
