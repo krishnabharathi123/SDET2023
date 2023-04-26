@@ -40,7 +40,7 @@ public class RemoveOccuranceOfIndex {
 	 * 			add the input array value into output array if the array value is not equal to the target
 	 * 		Print the output array
 	 */
-	// O[2n]
+	// O[2n] --> O[n]
 	private void removeOcc(int[] num, int index) {
 		if (index < num.length) {
 			int val = num[index];
