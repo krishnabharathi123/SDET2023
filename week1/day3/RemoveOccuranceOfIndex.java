@@ -1,4 +1,4 @@
-package week1.day3;
+package assignments.week1.day3;
 
 import java.util.Arrays;
 
@@ -27,21 +27,40 @@ public class RemoveOccuranceOfIndex {
 		removeOcc(num, index);
 	}
 
+	/*
+	 * Validate whether the given index is less that input array length
+	 * If yes ---> throw the error msg
+	 * If no --->
+	 * 		Store the array value present in given index in a target variable.
+	 * 		loop till the array length
+	 * 			verify whether the array value is equal to the target value
+	 * 				if yes, then increment the counter
+	 * 		create a new array with length = inputarray length - counter value
+	 * 		loop till the array length
+	 * 			add the input array value into output array if the array value is not equal to the target
+	 * 		Print the output array
+	 */
+	// O[2n]
 	private void removeOcc(int[] num, int index) {
-		int val = num[index];
-		int count=0;
-		for(int i=0;i<num.length;i++) {
-			if(num[i]==val) {
-				count++;
+		if (index < num.length) {
+			int val = num[index];
+			int count = 0;
+			for (int i = 0; i < num.length; i++) {
+				if (num[i] == val) {
+					count++;
+				}
 			}
-		}
-		int[] outArr=new int[num.length-count];
-		int j=0;
-		for(int i=0;i<num.length;i++) {
-			if(num[i]!=val) {
-				outArr[j++]=num[i];
+			int[] outArr = new int[num.length - count];
+			int j = 0;
+			for (int i = 0; i < num.length; i++) {
+				if (num[i] != val) {
+					outArr[j++] = num[i];
+				}
 			}
+			System.out.println(Arrays.toString(outArr));
+		} else {
+			System.out.println("Given index is greater than the input array length");
 		}
-		System.out.println(Arrays.toString(outArr));
 	}
+
 }
