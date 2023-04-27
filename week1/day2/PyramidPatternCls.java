@@ -1,6 +1,6 @@
 package assignments.week1.day2;
 
-public class PyramidPatternCls {
+public class DimondPattern {
 /*
  * Combine the upper triangle and lower triangle
  * Reduce the length of outer loop in any one of the part
