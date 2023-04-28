@@ -6,69 +6,79 @@ public class PowerOfTwo {
 
 	@Test
 	public void positive() {
-		int num= 128;
-		System.out.println(twoPower1(num));
+		int num = 128;
+		System.out.println(twoPower2(num));
 	}
-	
+
 	@Test
 	public void negative() {
-		int num= 15;
-		System.out.println(twoPower1(num));
+		int num = 0;
+		System.out.println(twoPower2(num));
 
 	}
-	
+
 	@Test
 	public void edge() {
-		int num= 168;
-		System.out.println(twoPower1(num));
+		int num = -8;
+		System.out.println(twoPower2(num));
 
-		
 	}
-	//not working for even non powers
+
+	// not working for even non powers
 	private boolean twoPower(int num) {
-		int val=1, i=0;
-		if(num==1) {
+		int val = 1, i = 0;
+		if (num == 1) {
 			return true;
 		}
-		
-		else if(num%2==0){
-			
-			while(val!=num) {
-				val=val*2;
+
+		else if (num % 2 == 0) {
+
+			while (val != num) {
+				val = val * 2;
 				i++;
 			}
-			System.out.println("2 power "+i);
+			System.out.println("2 power " + i);
 			return true;
 		}
-		
+
 		return false;
-		
+
 	}
-	//not working
-	public boolean twoPower1(int num) {
-		int val=1;
-		if(num==0) {
-			return true;
+
+	/*
+	 * Check whether the given num is negative since the input is integer
+	 * 	If negative then multiply with -1
+	 * Check if the given number is 1. If yes return true .since 2^0 =1
+	 * Check if given number is odd . If yes return false
+	 * Check if given number is even. If yes verify the remainder of number continuously till number is less than 1
+	 * 	If remainder is equal to 1 in any iteration , return false
+	 * 		else return true.
+	 */
+	//TimeComplexity --> O(n)
+	public boolean twoPower2(int num) {
+		int val = 1, i = 0;
+		if (num < 0) { //to handle negative values
+			num = num * -1;
 		}
+		if (num == 1) {
+			return true;
+		} 
 		
-		else if(num%2==0){
-			while(num>0) {
-				num=num/2;
-				val=num%2;
-				if(num==1 && val==1) {
+		else if (num % 2 != 0) {
+			return false;
+		} 
+		//For even u can get modulus as 1 when n=1;
+		else if (num % 2 == 0) {
+			while (num > 1) {
+				val = num % 2;
+				if (val == 1) {
 					return false;
 				}
-				else if(num==1 && val==0) {
-					return true;
-				}
-				
+				num = num / 2;
 			}
+			
 		}
-		
-		return false;
-		
-		
+		return true;
 	}
-	
-	
+
 }
