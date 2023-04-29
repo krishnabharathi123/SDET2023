@@ -8,7 +8,7 @@ public class RemoveFirstLastOccurance {
 
 	@Test
 	public void positive() {
-		int[] arr = { 2, 1, 3, 5, 8, 1, 7, 9, 8 };
+		int[] arr = { 2, 1, 1, 5, 8, 9, 7, 1, 9, 1, 8, 10 };
 		int num = 1;
 		removeFrstLstOcc(arr, num);
 	}
@@ -20,16 +20,18 @@ public class RemoveFirstLastOccurance {
 		removeFrstLstOcc(arr, num);
 	}
 
+	@Test
 	public void edge1() {
 		int[] arr = { 0, 0, 1, 0, 0 };
 		int num = 1;
-		removeFrstLstOcc(arr, num);
+		removeFrstLstOcc_1(arr, num);
 	}
 
+	@Test
 	public void negative() {
 		int[] arr = { 3, 5, 6, 7, 8 };
 		int num = 1;
-		removeFrstLstOcc(arr, num);
+		removeFrstLstOcc_1(arr, num);
 	}
 
 	/*
@@ -51,6 +53,8 @@ public class RemoveFirstLastOccurance {
 		int right = arr.length - 1;
 		int l = 0, r = 0;
 
+		// { 2, 1, 1, 5, 8, 9, 7, 9, 1, 8 };
+
 		int[] arr1 = new int[arr.length - 2];
 		int k = arr1.length - 1;
 		while (left <= right) {
@@ -63,21 +67,48 @@ public class RemoveFirstLastOccurance {
 			else {
 				arr1[left - l] = arr[left++];
 			}
-//{ 2, 1, 3, 5, 8, 1, 7, 9, 8 };
+			// { 2, 1, 3, 5, 8, 1, 7, 9, 8 };
 			if (arr[right] == num && r != 1) {
 				r++;// 1
 				right--;
 				// k--;
 
 			} else {
-				arr1[k] = arr[right--];
-				k--;
+				arr1[k--] = arr[right--];
 
 			}
 
 		}
 		System.out.println(Arrays.toString(arr1));
 
+	}
+
+	//2pass ==> O(n)+O(n)===> O(2n) ==>o(n)
+	public void removeFrstLstOcc_1(int[] arr, int num) {
+		int count = 0;
+		for (int i = 0; i < arr.length; i++) {//O(n)
+			if (arr[i] == num) {
+				count++;
+			}
+		}
+		// System.out.println(count);
+		// { 2, 1, 1, 5, 8, 9, 7, 9, 1, 8 };
+		int counter = count;// 3
+		int k = 0;
+		if (count > 2) {
+			int[] arr1 = new int[arr.length - 2];
+			for (int j = 0; j < arr.length; j++) {//O(n)
+				if (arr[j] == num) {
+					count--;// 2
+				}
+
+				if (!((arr[j] == num && count == 0) || (arr[j] == num && count == counter - 1))) {
+					arr1[k++] = arr[j];
+				}
+
+			}
+			System.out.println(Arrays.toString(arr1));
+		}
 	}
 
 }
