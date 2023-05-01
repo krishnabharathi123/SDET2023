@@ -44,12 +44,13 @@ public class RemoveDuplicatesFromSortedArray {
 	 * Loop from count till array length and assign -1 to input array
 	 */
 	//Time Taken -20m
+	//time Complexity -O(n)
 	private void removeDuplicates(int[] nums) {
 		int left =0;
 		int right =1;
 		int count =0;
 		int[] newArr= new int[nums.length];
-		while(right<nums.length) {
+		while(right<nums.length) {//O(n/2)
 			//{1,1,2,2,3,3,4,4,5 }
 			if(nums[left]!=nums[right]) {
 				newArr[count++]=nums[left];//1,2,3,4
@@ -61,7 +62,7 @@ public class RemoveDuplicatesFromSortedArray {
 		count=count+1;
 		System.out.println(count);
 		
-		for(int i=0;i<=count-1;i++) {
+		for(int i=0;i<=count-1;i++) {//O(n)
 			nums[i]=newArr[i];
 		}
 		for(int i=count;i<nums.length;i++) {
