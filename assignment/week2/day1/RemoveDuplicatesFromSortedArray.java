@@ -9,14 +9,14 @@ public class RemoveDuplicatesFromSortedArray {
 	@Test
 	public void positive() {
 		int[] nums = {0,0,1,1,1,2,2,3,3,4 };
-		removeDuplicates(nums);
+		removeDuplicateInMemory(nums);
 	}
 
 
 	@Test
 	public void edge() {
 		int[] nums = { 5,5,5,5,5,5 };
-		removeDuplicates(nums);
+		removeDuplicateInMemory(nums);
 	}
 
 	/*
@@ -26,8 +26,33 @@ public class RemoveDuplicatesFromSortedArray {
 	@Test
 	public void negative() {
 		int[] nums = { 1, 2, 3, 4 };
-		removeDuplicates(nums);
+		removeDuplicateInMemory(nums);
 	}
+	
+	/*
+	 * 2 Pointer ---> equividirectional
+	 * Set left =0 and right=1
+	 * loop till right<nums.length
+	 * compare whether left value == right value --> If yes, right++
+	 * else assign nums[left+1]=nums[right] and increment left and right
+	 */
+	public void removeDuplicateInMemory(int[] nums) {
+		int left=0;
+		int right=1;
+		while(right<nums.length) {
+			if(nums[left]==nums[right]) {
+				right++;
+			}
+			else {
+				nums[left+1]=nums[right++];
+				left++;
+			}
+		}
+		System.out.println(left+1);
+		System.out.println(Arrays.toString(nums));
+	}
+	
+	
 	//Time Taken -30m
 	/*
 	 * Assign left pointer to the 0th index
@@ -44,13 +69,12 @@ public class RemoveDuplicatesFromSortedArray {
 	 * Loop from count till array length and assign -1 to input array
 	 */
 	//Time Taken -20m
-	//time Complexity -O(n)
 	private void removeDuplicates(int[] nums) {
 		int left =0;
 		int right =1;
 		int count =0;
 		int[] newArr= new int[nums.length];
-		while(right<nums.length) {//O(n/2)
+		while(right<nums.length) {
 			//{1,1,2,2,3,3,4,4,5 }
 			if(nums[left]!=nums[right]) {
 				newArr[count++]=nums[left];//1,2,3,4
@@ -62,7 +86,7 @@ public class RemoveDuplicatesFromSortedArray {
 		count=count+1;
 		System.out.println(count);
 		
-		for(int i=0;i<=count-1;i++) {//O(n)
+		for(int i=0;i<=count-1;i++) {
 			nums[i]=newArr[i];
 		}
 		for(int i=count;i<nums.length;i++) {
