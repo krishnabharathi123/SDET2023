@@ -31,6 +31,8 @@ public class ReversePrefixofWord {
 	 * --> If yes, loop from 0th index till the indexOf(ch) 
 	 * ----> swap left and right pointer till left crosses right pointer
 	 */
+	//Time complexity --> O(n)
+	//Space Complexity --> O(n)
 	private String reversePrefix(String str, char ch) {
 		StringBuilder sb = new StringBuilder(str);
 		int chIndex = str.indexOf(ch);
