@@ -25,7 +25,8 @@ public class SearchInsertPosition {
 		System.out.println(searchInsrtPosition(nums,target));
 	}
 	
-	//1,3,5,6
+	//Time Complexity --> O(logn)
+	//Space Complexity --> O(1)
 	private int searchInsrtPosition(int[] nums, int target) {
 		int left=0;
 		int right=nums.length-1;
