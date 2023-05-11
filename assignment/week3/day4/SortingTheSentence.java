@@ -17,9 +17,11 @@ public class SortingTheSentence {
 		String s="Myself2 Me1 I4 and3";
 		sortSenetence1(s);
 	}
+	
 	//Time Taken - 20m
+		// Using TreeMap
 	 	//split the value using " " and store it in the string array
-    	//get the last character and store it as a key and remaining characters as a value in TreeMap
+    		//get the last character and store it as a key and remaining characters as a value in TreeMap
 		//get the value and append in the input string except last value of each character
 	
 	//Time Complexity --> O(n*m)
