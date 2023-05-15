@@ -24,82 +24,16 @@ public class BaseballGame {
 		String[] ops= {"1","C"};
 		baseBall2(ops);
 	}
-	//"5","-2","4","C","D","9","+","+"
-	private void baseBall(String[] ops) {
-		List<Integer> ls=new LinkedList<Integer>();
-		int val;
-		int size=-1;
-		for(int i=0;i<ops.length;i++) {
-			char charAt = ops[i].charAt(0);
-			int num=Integer.parseInt(ops[i]);
-			System.out.println(num);
-			if(Character.isDigit(charAt)) {
-				
-				ls.add(Integer.parseInt(ops[i]));
-				size++;
-			}
-			/*else if(charAt=='C') {
-				//ls.remove(i-1);
-				ls.remove(size);
-				size--;
-			}
-			else if(charAt=='D') {
-				val=2*(ls.get(size));
-				ls.add(val);
-				size++;
-				
-			}
-			else if(charAt=='+') {
-				val=ls.get(size)+ls.get(size-1);
-				ls.add(val);
-				size++;
-			}*/
-		}
-		System.out.println(ls);
-	}
+	//using switch Statement
 	/*
-	 * Using Linkedlist inbuild function with try catch block
+	 * Add the values in the list when the value is a number
+	 * else if value is 'C' remove previous value from the list
+	 * else if value is 'D' add 2*previous value and store it in the list
+	 * else if value is '+' add last index value and last index-1 value in the list
+	 * Add all the values in the list and return the output
 	 */
-	private void baseBall1(String[] ops) {
-		List<Integer> ls=new LinkedList<Integer>();
-		int val;
-		int size=-1;
-		int sum=0;
-		for(int i=0;i<ops.length;i++) {
-			
-			try {
-			int num=Integer.parseInt(ops[i]);
-			//System.out.println(num);
-				ls.add(Integer.parseInt(ops[i]));
-				size++;
-			}
-			catch(NumberFormatException e) {
-				char charAt = ops[i].charAt(0);
-				if(charAt=='C') {
-				//ls.remove(i-1);
-				ls.remove(size);
-				size--;
-			}
-			else if(charAt=='D') {
-				val=2*(ls.get(size));
-				ls.add(val);
-				size++;
-				
-			}
-			else if(charAt=='+') {
-				val=ls.get(size)+ls.get(size-1);
-				ls.add(val);
-				size++;
-			}
-			}
-			
-		}
-		for (Integer in : ls) {
-			sum=sum+in;
-		}
-		System.out.println(sum);
-	}
-	//using switch
+	//Time Complexity --> O(n)
+	//Space Complexity --> O(n)
 	private void baseBall2(String[] ops) {
 		List<Integer> ls=new LinkedList<Integer>();
 		int val;
