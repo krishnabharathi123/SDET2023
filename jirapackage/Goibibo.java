@@ -77,10 +77,20 @@ public class Goibibo {
 		driver.findElement(By.xpath("//a[text()='Done']")).click();
 		driver.findElement(By.xpath("//span[text()='SEARCH FLIGHTS']")).click();
 
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,2000000)", "");
+		String price=driver.findElement(By.xpath("//span[contains(@class,'quicksand fb')]")).getText();
+		System.out.println(price);
+		driver.findElement(By.xpath("//input[@value='BOOK']")).click();
+		String price1=driver.findElement(By.xpath("//span[text()='Skip fare selection']/following::span[2]")).getText();
+		System.out.println(price1);
 		
-		List<WebElement> onwardFlights = driver.findElements(By.xpath("//div[contains(@class,'flexRow')]/div[1]/following::span[@class='font20']"));
+		if(price1.contains(price)) {
+			System.out.println("price matches");
+		}
+		
+		/*JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,500)", "");
+		Thread.sleep(2000);*/
+		/*List<WebElement> onwardFlights = driver.findElements(By.xpath("//div[contains(@class,'flexRow')]/div[1]/following::span[@class='font20']"));
 		System.out.println(onwardFlights.size());
 		//List<WebElement> inwardFlights = driver.findElements(By.xpath("//div[contains(@class,'flexRow')]/div[2]"));
 		//JavascriptExecutor js = (JavascriptExecutor)driver;
@@ -95,7 +105,7 @@ public class Goibibo {
 			//js.executeScript("arguments[0].scrollIntoView(true);", on);
 			System.out.println(on.getText());
 			
-		}
+		}*/
 	}
 	
 	public void calenderHandling() {
