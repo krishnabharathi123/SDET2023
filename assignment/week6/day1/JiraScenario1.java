@@ -50,6 +50,7 @@ public class JiraScenario1 {
 		driver.manage().window().maximize();
 		
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(20));
 		
 		driver.get("https://comparecheck.atlassian.net/");
 		
@@ -89,14 +90,14 @@ public class JiraScenario1 {
 		driver.findElement(By.id("childIssuesPanel")).sendKeys(currentTimeMillis);
 		
 		driver.findElement(By.xpath("//button[contains(@data-testid,'child')]//span[text()='Create']")).click();
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		WebElement el=driver.findElement(By.xpath("//span[text()='"+currentTimeMillis+"']"));
 		Actions builder1 = new Actions(driver);
-		builder1.doubleClick(el).perform();
+		builder1.click(el).perform();
 		/*WebElement el=driver.findElement(By.xpath("//span[contains(text(),'child issue1')]/../../../.."));
 		Actions builder1 = new Actions(driver);
 		builder1.click().perform();*/
-		
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='Show:']")));
 		WebElement des=driver.findElement(By.xpath("//span[contains(text(),'description')]"));
 		des.click();
 		Thread.sleep(2000);
@@ -115,15 +116,108 @@ public class JiraScenario1 {
 		
 		driver.findElement(By.xpath("//button[@aria-label='None- edit Labels']/following::span")).click();
 		
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(20));
+		
 		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div[text()='test']"))));
 		
 		driver.findElement(By.xpath("//div[text()='test']")).click();
-		WebElement comment=driver.findElement(By.xpath("//input[@placeholder='Add a comment…']/.."));
-		js.executeScript("arguments[0].scrollIntoView(true);", comment);
-		driver.findElement(By.xpath("//input[@placeholder='Add a comment…']/following::div")).click();
-		driver.findElement(By.xpath("//input[@placeholder='Add a comment…']/following::div")).sendKeys("adding jira comments123");
 		
+		WebElement comment=driver.findElement(By.xpath("//input[@placeholder='Add a comment…']"));
+		comment.click();
+		Thread.sleep(5000);
+		String comments="adding Jira comments";
+		//WebElement com=driver.findElement(By.cssSelector(".placeholder-decoration.ProseMirror-widget"))dding jira comments123");
+		builder1.sendKeys(comments).perform();
+		driver.findElement(By.xpath("//span[text()='Save']")).click();
+		Thread.sleep(2000);
+		String commentsAdded=driver.findElement(By.xpath("//p[@data-renderer-start-pos='1']")).getText();
+		Assert.assertEquals(comments, commentsAdded);
+		
+		driver.findElement(By.xpath("//button[@aria-label='Close']")).click();
+		
+		driver.findElement(By.xpath("//span[text()='None']")).click();
+		driver.findElement(By.xpath("//span[text()='Subtask']")).click();
+		
+		driver.findElement(By.xpath("//input[@name='search']")).sendKeys(currentTimeMillis);
+		builder1.sendKeys(Keys.ENTER);
+		Thread.sleep(2000);
+		//driver.findElement(By.xpath("//mark[text()='1685546465131']")).click();
+		driver.findElement(By.xpath("//div[@data-test-id='platform-board-kit.ui.card.card']")).click();
+		
+		WebElement attach=driver.findElement(By.xpath("//span[text()='Attach']"));
+		attach.click();
+		
+
+		StringSelection stringSelection = new StringSelection("D:\\TestLeaf\\SdetCourse\\ClassNotes\\Class1");
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, null);
+
+        Robot robot = new Robot();
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+        
+        String attachmentFile=driver.findElement(By.id("titleBoxHeader")).getText();
+        if(attachmentFile.contains("Class1")) {
+        	System.out.println("correct file attached");
+        }
+        else {
+        	System.out.println("file not attaced properly");
+        }
+        
+        driver.findElement(By.xpath("//a[contains(@data-testid,'parent-issue.item')]")).click();
+        
+       String parentTask= driver.findElement(By.xpath("//a[contains(@data-testid,'current-issue.item')]/span")).getText();
+       
+       System.out.println(parentTask);
+       driver.findElement(By.xpath("//button[contains(@data-testid,'trigger.button')]")).click();
+       
+       driver.findElement(By.xpath("//span[text()='Delete']")).click();
+       
+       driver.findElement(By.xpath("//button[contains(@data-testid,'delete-issue.confirm')]")).click();
+       
+       WebElement cancel = driver.findElement(By.xpath("//button[contains(@data-test-id,'clear-button')]"));
+       wait.until(ExpectedConditions.visibilityOf(cancel));
+       driver.navigate().refresh();
+       //Thread.sleep(3000);
+       //cancel.click();
+      //WebElement srch= driver.findElement(By.xpath("//input[@data-test-id='searchfield']"));
+      //srch.clear();
+       WebElement drop = driver.findElement(By.xpath("//label[text()='Group by']/following::button"));
+       drop.click();
+       driver.findElement(By.xpath("//span[text()='None']")).click();
+       //driver.findElement(By.xpath("//input[@data-test-id='searchfield']")).sendKeys(parentTask);
+      
+      // driver.findElement(By.xpath("//h2[contains(@data-test-id,'editable-title')]")).getText();
+       
+       
+       
+       
+		//builder1.sendKeys("D:\\TestLeaf\\SdetCourse\\ClassNotes").perform();
+		//d. add a comment
+		//e. click on add and validate the comment
+		//org.openqa.selenium.ElementNotInteractableException:
+		/*js.executeScript("arguments[0].scrollIntoView(true);", comment);
+		js.executeScript("arguments[0].click();", comment);
+		//driver.findElement(By.xpath("//div[@data-testid='click-wrapper']")).click();
+		driver.findElement(By.xpath("//div[@data-testid='click-wrapper']")).sendKeys("adding jira comments123");*/
+		
+        
+        /* sathish code
+         * //open attach
+		String path = "\\src\\test\\java\\weekDayAssignment\\childIssueAttachment.txt";
+		String dirPath = System.getProperty("user.dir");
+		System.out.println(dirPath + " --***--- " + path);
+		Thread.sleep(3000);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text() = 'Attach']"))).click();
+		act.sendKeys(dirPath+path).build().perform();
+		Thread.sleep(2000);
+		act.sendKeys(Keys.ENTER).perform();
+		Thread.sleep(8000);
+		WebElement atchmnt = wait.until(ExpectedCond
+         */
 		
 	}
 
